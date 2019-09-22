@@ -1,0 +1,24 @@
+services:
+  - mysql
+
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+  - cp config/database.yml config/database.yml.travis
+before_install:
+  - gem update --system
+  - gem install bundler
+env:
+  global:
+    - CC_TEST_REPORTER_ID=8b1432b7c3326ec76022791c2c16aa49ed8932cd7bf3e30ae7bd0c92baaadaad
+language: ruby
+rvm:
+  - 2.5.0
+script:
+  - bundle install --jobs=3 --retry=3
+  - bundle exec rails db:reset db:setup db:migrate RAILS_ENV=test
+  - bundle exec rspec
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+dist: trusty
