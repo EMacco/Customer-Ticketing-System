@@ -7,18 +7,18 @@ RSpec.describe Request, type: :model do
   end
 
   describe "Validations" do
-    describe '#title' do
+    describe "#title" do
       it { should validate_presence_of(:title) }
       it { should validate_length_of(:title).is_at_most(30) }
     end
 
-    describe '#description' do
+    describe "#description" do
       it { should validate_presence_of(:description) }
       it { should validate_length_of(:description).is_at_most(500) }
     end
 
     describe "#status" do
-      it { should allow_values('open', 'close', nil).for(:status) }
+      it { should allow_values("open", "close", nil).for(:status) }
     end
   end
 end

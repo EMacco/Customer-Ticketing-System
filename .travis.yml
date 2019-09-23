@@ -14,7 +14,7 @@ env:
     - CC_TEST_REPORTER_ID=8b1432b7c3326ec76022791c2c16aa49ed8932cd7bf3e30ae7bd0c92baaadaad
 language: ruby
 rvm:
-  - 2.5.0
+  - 2.5.6
 script:
   - bundle install --jobs=3 --retry=3
   - bundle exec rails db:reset db:setup db:migrate RAILS_ENV=test
