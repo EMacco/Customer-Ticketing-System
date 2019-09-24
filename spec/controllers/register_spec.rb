@@ -26,7 +26,7 @@ RSpec.describe "Registration API", type: :request do
       before { post "/api/v1/auth/register", params: valid_attributes }
 
       it "creates a user" do
-        expect(json["user"]["email"]).to eq(valid_attributes[:email])
+        expect(json["payload"]["user"]["email"]).to eq(valid_attributes[:email])
       end
 
       it "returns status code 201" do
@@ -42,7 +42,7 @@ RSpec.describe "Registration API", type: :request do
       end
 
       it "returns a validation failure message" do
-        expect(json["errors"]).
+        expect(json["errors"]["message"]).
           to eq("Validation failed: First name is too short (minimum is 2 characters)")
       end
     end

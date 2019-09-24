@@ -8,7 +8,7 @@ module Api
           if user
             session[:user_id] = user.id
           end
-          json_response({ user: user }, :created)
+          success_response({ user: user }, :created)
         end
 
         private
