@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      resources :requests, only: [:create]
+
       namespace :auth do
         resources :register, only: [:create]
         delete :logout, to: "sessions#logout"
