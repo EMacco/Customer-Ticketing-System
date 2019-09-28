@@ -11,6 +11,18 @@ module CurrentUserConcern
     end
   end
 
+  def signed_in?
+    !@current_user.nil?
+  end
+
+  def owner?(obj)
+    @current_user.id == obj.user_id
+  end
+
+  def admin?
+    @current_user.role == "admin"
+  end
+
   def logout
     reset_session
     render json: { status: 200, logged_in: false }

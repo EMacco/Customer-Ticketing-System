@@ -87,4 +87,5 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include RequestSpecHelper, type: :request
   config.include AuthenticationHelper, type: :controller
+  config.include RequestSpecHelper, type: :controller
 end
