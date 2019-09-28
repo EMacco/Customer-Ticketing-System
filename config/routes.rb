@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :requests, only: [:create, :destroy, :index]
       get "/requests/:id", to: "requests#get_specific"
+      patch "/users/:id", to: "users#update_role"
 
       namespace :auth do
         resources :register, only: [:create]
