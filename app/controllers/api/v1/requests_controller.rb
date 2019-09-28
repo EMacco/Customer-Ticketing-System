@@ -37,6 +37,7 @@ module Api
           return error_response({ global: "You don't have this permission" },
                                 :forbidden)
         end
+
         success_response(request: request, comments: request.comments)
       end
 
