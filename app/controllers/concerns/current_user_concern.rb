@@ -11,12 +11,12 @@ module CurrentUserConcern
     end
   end
 
-  def signed_in?
-    !@current_user.nil?
-  end
-
   def owner?(obj)
     @current_user.id == obj.user_id
+  end
+
+  def agent?
+    @current_user.role == "agent"
   end
 
   def admin?

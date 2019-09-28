@@ -4,8 +4,8 @@ describe Api::V1::RequestsController, type: :controller do
   let!(:new_user) { create(:user) }
   let!(:user2) { create :user }
   let!(:new_request) do
-    user2.requests.create(title: "Emma",
-                          description: "Emma")
+    user2.requests.create(title: Faker::Book::title,
+                          description: Faker::Lorem::sentence)
   end
 
   describe "requests#create" do
@@ -41,11 +41,11 @@ describe Api::V1::RequestsController, type: :controller do
     end
 
     context "User is not owner of request" do
-      it "should return could not find request" do
+      it "should return no permission" do
         login new_user
-        delete :destroy, params: { id: 0 }
-        expect(response).to have_http_status(:not_found)
-        expect(json["errors"]["global"]).to eq("Couldn't find Request")
+        delete :destroy, params: { id: new_request["id"] }
+        expect(response).to have_http_status(:forbidden)
+        expect(json["errors"]["global"]).to eq("You don't have this permission")
       end
     end
 
@@ -54,7 +54,7 @@ describe Api::V1::RequestsController, type: :controller do
         login user2
         delete :destroy, params: { id: new_request.id }
         expect(response).to have_http_status(:ok)
-        expect(json["payload"]["message"]).to eq("Request deleted")
+        expect(json["payload"]["message"]).to eq("Request closed")
       end
     end
 
