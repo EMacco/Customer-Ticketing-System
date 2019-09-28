@@ -23,6 +23,10 @@ module CurrentUserConcern
     @current_user.role == "admin"
   end
 
+  def agent?
+    @current_user.role == "agent"
+  end
+
   def logout
     reset_session
     render json: { status: 200, logged_in: false }
