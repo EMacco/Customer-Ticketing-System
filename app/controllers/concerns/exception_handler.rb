@@ -3,7 +3,7 @@ module ExceptionHandler
 
   included do
     rescue_from ActiveRecord::RecordNotFound do |e|
-      error_response({ message: e.message }, :not_found)
+      error_response({ global: e.message }, :not_found)
     end
 
     rescue_from ActiveRecord::RecordInvalid do |e|

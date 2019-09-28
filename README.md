@@ -1,5 +1,5 @@
 # Customer Support Ticketing System
-[![Build Status](https://travis-ci.org/EMacco/Customer-Ticketing-System.svg?branch=develop)](https://travis-ci.org/EMacco/Customer-Ticketing-System)
+[![Build Status](https://travis-ci.org/EMacco/Customer-Ticketing-System.svg?branch=develop)](https://travis-ci.org/EMacco/Customer-Ticketing-System) [![Maintainability](https://api.codeclimate.com/v1/badges/ce239eaf015d82a548d2/maintainability)](https://codeclimate.com/github/EMacco/Customer-Ticketing-System/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/ce239eaf015d82a548d2/test_coverage)](https://codeclimate.com/github/EMacco/Customer-Ticketing-System/test_coverage)
 
 This system allows customers to be able to place support requests to agents who will be able to  process these requests, and interact with the customer through comments.
 

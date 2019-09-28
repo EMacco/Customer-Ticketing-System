@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
     },
            status: :not_found
   end
+
+  def unauthorized_access
+    error_response("You are not logged in", :unauthorized)
+  end
 end
