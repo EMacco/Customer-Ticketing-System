@@ -25,9 +25,19 @@ module Api
 
       def index
         return unauthorized_access unless @current_user
-
         requests = admin? || agent? ? Request.all : @current_user.requests
         success_response requests
+      end
+
+      def get_specific
+        return unauthorized_access unless @current_user
+
+        request = Request.find_by!(id: params["id"])
+        unless admin? || agent? || owner?(request)
+          return error_response({ global: "You don't have this permission" },
+                                :forbidden)
+        end
+        success_response(request: request, comments: request.comments)
       end
 
       private

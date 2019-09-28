@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :requests, only: [:create, :destroy, :index]
+      get "/requests/:id", to: "requests#get_specific"
 
       namespace :auth do
         resources :register, only: [:create]
