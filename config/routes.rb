@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "static#index"
+
   namespace :api do
     namespace :v1 do
       resources :requests, only: [:create, :destroy, :index]
@@ -14,7 +16,8 @@ Rails.application.routes.draw do
         post :login, to: "sessions#login"
       end
     end
+    match '*unmatched_route', :to => 'base#raise_not_found!', :via => :all
   end
 
-  match '*unmatched_route', :to => 'application#raise_not_found!', :via => :all
+  match '*unmatched_route', :to => 'static#index', :via => :all
 end
