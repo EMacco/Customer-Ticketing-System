@@ -7,7 +7,7 @@ RSpec.describe "404 Route", type: :request do
 
       it "returns No route matches invalid-route" do
         expect(json["errors"]["global"]).
-          to eq("No route matches api/v1/auth/invalid-route")
+          to eq("No route matches v1/auth/invalid-route")
       end
 
       it "returns status code 404" do
