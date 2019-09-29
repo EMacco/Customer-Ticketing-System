@@ -15,10 +15,6 @@ module CurrentUserConcern
     @current_user.id == obj.user_id
   end
 
-  def agent?
-    @current_user.role == "agent"
-  end
-
   def admin?
     @current_user.role == "admin"
   end
