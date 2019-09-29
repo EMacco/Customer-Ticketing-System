@@ -4,8 +4,8 @@ describe Api::V1::RequestsController, type: :controller do
   let!(:new_user) { create(:user) }
   let!(:user2) { create :user }
   let!(:new_request) do
-    user2.requests.create(title: Faker::Book::title,
-                          description: Faker::Lorem::sentence)
+    user2.requests.create(title: Faker::Book.title,
+                          description: Faker::Lorem.sentence)
   end
 
   describe "requests#create" do

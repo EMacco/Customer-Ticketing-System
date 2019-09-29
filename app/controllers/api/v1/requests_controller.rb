@@ -25,6 +25,7 @@ module Api
 
       def index
         return unauthorized_access unless @current_user
+
         requests = admin? || agent? ? Request.all : @current_user.requests
         success_response requests
       end

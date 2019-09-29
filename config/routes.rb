@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       get "/requests/:id", to: "requests#get_specific"
       patch "/users/:id", to: "users#update_role"
 
+      post "/comments/:request_id", to: "comments#create"
+
       namespace :auth do
         resources :register, only: [:create]
         delete :logout, to: "sessions#logout"

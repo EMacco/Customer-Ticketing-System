@@ -3,8 +3,11 @@ module Api
     class UsersController < Api::V1::BaseController
       def update_role
         return unauthorized_access unless @current_user
-        return error_response({ global: "You don't have this permission" },
-                              :forbidden) unless admin?
+
+        unless admin?
+          return error_response({ global: "You don't have this permission" },
+                                :forbidden)
+        end
         puts user_params
         user = User.find_by!(id: user_params["id"])
         user.role = user_params["role"] || "user"
@@ -16,8 +19,8 @@ module Api
 
       def user_params
         params.permit(
-            :id,
-            :role
+          :id,
+          :role
         )
       end
     end
