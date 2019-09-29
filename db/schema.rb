@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 20190923114409) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "text"
+    t.text "text"
     t.bigint "user_id"
     t.bigint "request_id"
     t.datetime "created_at", null: false
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20190923114409) do
 
   create_table "requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
-    t.string "description"
+    t.text "description"
     t.string "status", default: "open"
     t.bigint "user_id"
     t.datetime "created_at", null: false
