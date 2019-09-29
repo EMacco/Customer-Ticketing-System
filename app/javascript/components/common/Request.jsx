@@ -1,6 +1,7 @@
 import React from 'react';
 import classname from 'classnames';
 import PropTypes from 'prop-types';
+import Ellipsis from 'react-ellipsis-pjs';
 import {Link} from "react-router-dom";
 import formatDate from "../../helpers/formatDate";
 
@@ -17,9 +18,9 @@ const Request = ({id, title, description, status, created_at}) => {
                             <span className="">{title}</span>
                         </h3>
                         <time className="block mb-2 text-sm text-gray-600" dateTime={created_at}>{formatDate(created_at).short}</time>
-                        <p>
+                        <Ellipsis lines={2}>
                             {description}
-                        </p>
+                        </Ellipsis>
                     </div>
                 </Link>
             </div>
