@@ -18,7 +18,7 @@ RSpec.describe Request, type: :model do
     end
 
     describe "#status" do
-      it { should allow_values("open", "close", nil).for(:status) }
+      it { should allow_values("open", "closed", nil).for(:status) }
     end
   end
 end
