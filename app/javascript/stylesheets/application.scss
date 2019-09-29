@@ -8,7 +8,7 @@
 
 .home_icon {
   width: 30px;
-  height: 23px;
+  height: 30px;
   margin-right: 10px;
 }
 
@@ -27,4 +27,18 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.sticky {
+  top: 0;
+  width: 100%;
+  transition: top 0.4s;
+}
+
+.notVisible {
+  top: -70px !important;
+}
+
+.top50p {
+  top: 50%;
 }

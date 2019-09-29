@@ -2,4 +2,5 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const IS_LOADING = 'IS_LOADING';
 export const SIGNIN_FAILURE = 'SIGNIN_FAILURE';
+export const SET_ALL_REQUESTS = 'SET_ALL_REQUESTS';
 
