@@ -26,3 +26,29 @@ export const logoutUser = history => dispatch => {
     localStorage.removeItem('currentUser');
     if (history) history.push('/');
 };
+
+
+export const loginUser = userData => async dispatch => {
+    try {
+        dispatch(isLoading(true));
+
+        const res = await axios.post('/auth/login', userData);
+        const user = res.data.payload;
+
+        localStorage.setItem('currentUser', JSON.stringify(user));
+
+        dispatch(setCurrentUser(user));
+        toast.success('Login successful');
+    } catch (error) {
+        if (error.response) {
+            const errors = error.response.data.errors;
+            if (errors.global) toast.error(errors.global);
+            return dispatch({
+                type: SIGNIN_FAILURE,
+                payload: errors
+            });
+        }
+        dispatch(isLoading(false));
+        toast.error('Please check your network connection and try again');
+    }
+};
