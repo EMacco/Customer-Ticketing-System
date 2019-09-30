@@ -7,6 +7,46 @@ import Request from "../common/Request";
 import {fetchRequests} from "../../actions/requests";
 import PreLoader from "../common/PreLoader";
 
+const exportToCsv = (filename, rows) => {
+    const processRow = (row) => {
+        let finalVal = '';
+        for (let j = 0; j < row.length; j++) {
+            let innerValue = row[j] === null ? '' : row[j].toString();
+            if (row[j] instanceof Date) {
+                innerValue = row[j].toLocaleString();
+            }
+            let result = innerValue.replace(/"/g, '""');
+            if (result.search(/("|,|\n)/g) >= 0)
+                result = '"' + result + '"';
+            if (j > 0)
+                finalVal += ',';
+            finalVal += result;
+        }
+        return finalVal + '\n';
+    };
+
+    let csvFile = '';
+    for (let i = 0; i < rows.length; i++) {
+        csvFile += processRow(rows[i]);
+    }
+
+    let blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
+    if (navigator.msSaveBlob) {
+        navigator.msSaveBlob(blob, filename);
+    } else {
+        let link = document.createElement("a");
+        if (link.download !== undefined) {
+            let url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
+};
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +56,11 @@ class Home extends Component {
     }
 
     printReportBtnClicked = () => {
-        console.log("Print the ticket");
+        const csvRow = [['id', 'title', 'description']];
+        self.closedRequests.map(req => {
+            csvRow.push([req.id, req.title, req.description])
+        });
+        exportToCsv("cts-report.csv", csvRow);
     };
 
     render() {
@@ -25,12 +69,14 @@ class Home extends Component {
 
         const openRequests = [];
         const closedRequests = [];
+        self.closedRequests = [];
 
         requests.map(request => {
             if(request.status === 'open') {
                 openRequests.push(<Request {...request} key={request.id} />)
             } else {
-                closedRequests.push(<Request {...request} key={request.id} />)
+                closedRequests.push(<Request {...request} key={request.id} />);
+                self.closedRequests.push(request);
             }
         });
 

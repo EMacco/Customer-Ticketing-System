@@ -39,6 +39,7 @@ export const changeUserRole = (pathname, userRole) => async dispatch => {
         const res = await axios.patch(pathname, userRole);
         const user = res.data.payload;
         dispatch(updateUserRole(user));
+        dispatch(isLoading(false));
         toast.success("User role has been successfully updated")
     } catch (error) {
         dispatch(isLoading(false));
