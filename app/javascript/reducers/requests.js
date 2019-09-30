@@ -1,6 +1,6 @@
 import {
     SET_ALL_REQUESTS,
-    IS_LOADING,
+    IS_LOADING, SET_SINGLE_REQUEST,
 } from "../actions/types";
 
 const initialState = {
@@ -15,6 +15,12 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 all: action.payload,
+                loading: false
+            };
+        case SET_SINGLE_REQUEST:
+            return {
+                ...state,
+                single: action.payload,
                 loading: false
             };
         case IS_LOADING:

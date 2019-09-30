@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import Auth from "../layouts/Auth";
 import NewRequest from "../pages/NewRequest";
+import FullRequest from "../pages/FullRequest";
 
 const Routes = () => (
     <Router>
@@ -11,6 +12,7 @@ const Routes = () => (
             <Route exact path="/" component={Home} />
             <Route exact path="/auth" component={Auth} />
             <Route exact path="/requests/new" component={NewRequest} />
+            <Route exact path="/requests/:id" component={FullRequest} />
 
             <Route path="*" component={NotFound} />
         </Switch>
