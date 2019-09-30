@@ -52,7 +52,7 @@ class Request extends Component {
     };
 
     render() {
-        const {id, title, description, status, created_at, full} = this.props;
+        const {id, status, full} = this.props;
 
         return(
             <div className={classname("w-full", {

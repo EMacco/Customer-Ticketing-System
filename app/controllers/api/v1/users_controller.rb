@@ -1,6 +1,15 @@
 module Api
   module V1
     class UsersController < Api::V1::BaseController
+      def index
+        return unauthorized_access unless @current_user
+        unless admin?
+          return error_response({ global: "You don't have this permission" },
+                                :forbidden)
+        end
+        success_response User.all
+      end
+
       def update_role
         return unauthorized_access unless @current_user
 
