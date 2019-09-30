@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :requests, only: [:create, :destroy, :index]
       get "/requests/:id", to: "requests#get_specific"
       patch "/users/:id", to: "users#update_role"
+      get "/users", to: "users#index"
 
       post "/comments/:request_id", to: "comments#create"
 
