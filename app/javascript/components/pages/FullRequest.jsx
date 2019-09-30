@@ -9,6 +9,7 @@ import NavBar from "../common/NavBar";
 import Request from "../common/Request";
 import Button from "../common/Button";
 import Comment from "../common/Comment";
+import {createComment} from "../../actions/comments";
 
 class FullRequest extends Component {
     constructor(props) {
@@ -24,8 +25,13 @@ class FullRequest extends Component {
         this.setState({ [e.target.name]: e.target.value });
     };
 
-    postCommentBtnClicked = () => {
+    postCommentBtnClicked = e => {
+        e.preventDefault();
+        const {createComment, fullRequest} = this.props;
+        const {comment} = this.state;
 
+        createComment(`comments/${fullRequest.request.id}`, {text: comment})
+        this.setState({comment: ''})
     };
 
     render() {
@@ -46,17 +52,21 @@ class FullRequest extends Component {
                             {
                                 request && (
                                     <Fragment>
-                                        <Request {...request} full first_name={user.first_name}
-                                        last_name={user.last_name}/>
+                                        <Request {...request} full first_name={user ? user.first_name : ''}
+                                        last_name={user ? user.last_name : ''}/>
                                         <hr className="border-gray-300 mt-8 mb-4" />
                                         <span className={classname("text-gray-700 italic",{
                                             "hidden": (comments.length === 0 && role === 'user') || request.status === 'closed'
                                         })}>Comments</span>
+                                        {
+                                            comments.map(com => <Comment {...com} key={com.id} />)
+                                        }
                                         <form className={classname("rounded border-gray-100 shadow px-4 pb-4 border flex",
                                             {
                                                 "hidden": (comments.length === 0 && role === 'user') || request.status === 'closed'
-                                            })}>
-                                            <input type="text" maxLength="100"
+                                            })}
+                                              onSubmit={this.postCommentBtnClicked}>
+                                            <input type="text" maxLength="300"
                                                    className="flex-grow mt-4 h-8 px-2 border rounded border-grey-400"
                                                    placeholder="Write something"
                                                    name="comment"
@@ -64,10 +74,6 @@ class FullRequest extends Component {
                                                    value={comment}/>
                                             <Button text="Post" style="bg-yellow-700 text-white hover:bg-red-800 rounded px-4 mt-4 ml-4" />
                                         </form>
-
-                                        {
-                                            comments.map(com => <Comment {...com} />)
-                                        }
                                     </Fragment>
                                 )
                             }
@@ -82,7 +88,8 @@ class FullRequest extends Component {
 FullRequest.propTypes = {
     fullRequest: PropTypes.object.isRequired,
     isLoading: PropTypes.bool.isRequired,
-    role: PropTypes.string
+    role: PropTypes.string,
+    createComment: PropTypes.func.isRequired
 };
 
 FullRequest.defaultProps = {
@@ -95,4 +102,4 @@ const mapStateToProps = state => ({
     role: state.auth.user.role
 });
 
-export default connect(mapStateToProps, {fetchSingleRequest})(withRouter(FullRequest));
+export default connect(mapStateToProps, {fetchSingleRequest, createComment})(withRouter(FullRequest));

@@ -1,12 +1,22 @@
 import {
     SET_ALL_REQUESTS,
     IS_LOADING, SET_SINGLE_REQUEST,
+    ADD_COMMENT
 } from "../actions/types";
 
 const initialState = {
     loading: false,
     all: [],
     single: {},
+};
+
+const addComment = (newComment, currentRequest) => {
+    let newComments = currentRequest.comments;
+    newComments.push(newComment);
+    return {
+        ...currentRequest,
+        comments: newComments
+    };
 };
 
 const authReducer = (state = initialState, action) => {
@@ -29,6 +39,12 @@ const authReducer = (state = initialState, action) => {
                 loading: action.payload,
                 errors: {}
             };
+        case ADD_COMMENT:
+            return {
+                ...state,
+                loading: false,
+                single: addComment(action.payload, state.single)
+            }
         default:
             return state;
     }
