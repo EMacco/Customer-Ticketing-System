@@ -39,7 +39,9 @@ module Api
                                 :forbidden)
         end
 
-        success_response(request: request, comments: request.comments)
+        success_response(request: request,
+                         comments: request.comments,
+                         user: request.user)
       end
 
       private

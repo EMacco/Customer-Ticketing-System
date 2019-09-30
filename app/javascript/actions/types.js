@@ -3,4 +3,4 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 export const IS_LOADING = 'IS_LOADING';
 export const SIGNIN_FAILURE = 'SIGNIN_FAILURE';
 export const SET_ALL_REQUESTS = 'SET_ALL_REQUESTS';
-
+export const SET_SINGLE_REQUEST = 'SET_SINGLE_REQUEST';

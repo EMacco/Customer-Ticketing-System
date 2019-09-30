@@ -54,18 +54,18 @@ class NavBar extends Component {
                 })}
             >
                 <nav className="flex items-center justify-between flex-wrap bg-teal p-6 bg-yellow-700 shadow">
-                    <div className="flex items-center flex-no-shrink text-white mr-6">
+                    <Link className="flex items-center flex-no-shrink text-white mr-6" to="/">
                         <img src="https://icon-library.net/images/customer-service-icon/customer-service-icon-24.jpg"
                              alt="Home icon"
                              className="home_icon w-10 h-10" />
-                        <Link className="font-semibold text-xl tracking-tight" to="/">CTS</Link>
-                    </div>
+                        <span className="font-semibold text-xl tracking-tight">CTS</span>
+                    </Link>
                     <div className="flex items-center w-auto">
                         <div>
-                            <Link className="mr-2 text-white spanLink hover:text-gray-200" to="/requests/new">New Request</Link>
+                            <Link className="mr-4 text-white spanLink hover:text-gray-200" to="/requests/new">New Request</Link>
                             {
                                 role === 'admin' && (
-                                    <Link className="mr-2 text-white spanLink hover:text-gray-200" to="/users">Users</Link>
+                                    <Link className="mr-4 text-white spanLink hover:text-gray-200" to="/users">Users</Link>
                                 )
                             }
                         <span onClick={this.logoutBtnClicked}
