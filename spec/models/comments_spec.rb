@@ -12,7 +12,7 @@ RSpec.describe Comment, type: :model do
       it {
         should validate_length_of(:text).
           is_at_least(3).
-          is_at_most(100)
+          is_at_most(300)
       }
     end
   end
