@@ -24,13 +24,14 @@ export const fetchRequests = () => async dispatch => {
         const res = await axios.get('/requests');
         const requests = res.data.payload;
         dispatch(setAllRequests(requests));
+        dispatch(isLoading(false));
     } catch (error) {
+        dispatch(isLoading(false));
         if (error.response) {
             const errors = error.response.data.errors;
             if (errors.global) toast.error(errors.global);
             return;
         }
-        dispatch(isLoading(false));
         toast.error('Please check your network connection and try again');
     }
 };
@@ -50,7 +51,6 @@ export const createRequest = (data, history) => async dispatch => {
             if (errors.global) toast.error(errors.global);
             return;
         }
-        dispatch(isLoading(false));
         toast.error('Please check your network connection and try again');
     }
 };
@@ -68,7 +68,6 @@ export const fetchSingleRequest = (pathName, history) => async dispatch => {
             if (errors.global) history.push('/not-found');
             return;
         }
-        dispatch(isLoading(false));
         toast.error('Please check your network connection and try again');
     }
 };
@@ -87,7 +86,6 @@ export const closeRequest = (pathName) => async dispatch => {
             if (errors.global) history.push('/not-found');
             return;
         }
-        dispatch(isLoading(false));
         toast.error('Please check your network connection and try again');
     }
 };

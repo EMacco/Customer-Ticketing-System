@@ -39,7 +39,9 @@ export const loginUser = userData => async dispatch => {
 
         dispatch(setCurrentUser(user));
         toast.success('Login successful');
+        dispatch(isLoading(false));
     } catch (error) {
+        dispatch(isLoading(false));
         if (error.response) {
             const errors = error.response.data.errors;
             if (errors.global) toast.error(errors.global);
@@ -48,7 +50,6 @@ export const loginUser = userData => async dispatch => {
                 payload: errors
             });
         }
-        dispatch(isLoading(false));
         toast.error('Please check your network connection and try again');
     }
 };

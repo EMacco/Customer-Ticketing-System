@@ -27,6 +27,7 @@ export const fetchAllUsers = () => async dispatch => {
         const res = await axios.get('/users');
         const users = res.data.payload;
         dispatch(setAllUsers(users));
+        dispatch(isLoading(false));
     } catch (error) {
         dispatch(isLoading(false));
         toast.error('Please check your network connection and try again');
