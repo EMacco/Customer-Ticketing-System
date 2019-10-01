@@ -15,6 +15,7 @@ export const createComment = (pathName, commentText) => async dispatch => {
         const res = await axios.post(pathName, commentText);
         const comment = res.data.payload;
         dispatch(addNewComment(comment));
+        dispatch(isLoading(false));
     } catch (error) {
         dispatch(isLoading(false));
         if (error.response) {
